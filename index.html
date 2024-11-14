@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Not Hesaplama Aracı</title>
+	<style>
+		body 
+		{
+			font-family: Arial, sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			text-align: center;
+		}
+		input, button 
+		{
+			padding: 10px;
+			margin: 5px;
+			font-size: 16px;
+		}
+		.red-text 
+		{
+			color: red;	
+		}
+		h5 
+		{
+			font-weight: normal; /* Yazıyı normal yap */
+			margin: 2px 0; /* Aradaki boşluğu azalt */
+			padding: 0;
+		}
+		h2 
+		{
+			margin-bottom: 10px; /* "Not Hesaplama Aracı" başlığı ile diğer metin arasındaki mesafeyi azalt */
+		}
+		#result 
+		{
+			margin-top: 50px; /* Sonuçlar başlığını daha alt kısıma yerleştir */
+		}
+		h3 
+		{
+			margin-top: 20px; /* Sonuçlar başlığını biraz daha aşağıya kaydır */
+		}
+    	</style>
+</head>
+<body>
+	<h2>Not Hesaplama Aracı</h2>
+	<h5>AA (4) için ort<=82, AB (3.5) için ort<=74, BB (3) için ort<=65</h5>
+	<h5>BC (2.5) için ort<=58, CC (2) için ort<=50, CD (1.5) için ort<=40</h5>
+	<label for="inputNumber">Bir sayı girin (0-100 arası):</label>
+	<input type="number" id="inputNumber" step="any" min="0" max="100">
+	<button onclick="calculate()">Hesapla</button>
+	<h3>Sonuçlar:</h3>
+    
+	<div id="result"></div>
+
+	<script>
+		function calculate()
+		{
+			const x = parseFloat(document.getElementById('inputNumber').value);
+			if (!isNaN(x) && x >= 0 && x <= 100) 
+			{
+				let AA = formatResult((82 - (x * 40 / 100)) * 100 / 60);
+				let AB = formatResult((74 - (x * 40 / 100)) * 100 / 60);
+				let BB = formatResult((65 - (x * 40 / 100)) * 100 / 60);
+				let BC = formatResult((58 - (x * 40 / 100)) * 100 / 60);
+				let CC = formatResult((50 - (x * 40 / 100)) * 100 / 60);
+				let CD = formatResult((40 - (x * 40 / 100)) * 100 / 60);
+
+				if (BC === 40) { CC = '-'; CD = '-'; }
+				else if (CC === 40) { CD = '-'; }
+
+                
+				document.getElementById('result').innerHTML = 
+				`
+					<p>AA (4) için: ${AA}</p>
+					<p>AB (3.5) için: ${AB}</p>
+					<p>BB (3) için: ${BB}</p>
+					<p>BC (2.5) için: ${BC}</p>
+					<p>CC (2) için: ${CC}</p>
+					<p class="red-text">CD (1.5) için: ${CD}</p>
+				`;
+			} 
+			else 
+			{
+				document.getElementById('result').textContent = 'Geçersiz giriş, lütfen 0 ile 100 arasında bir değer girin.';
+			}
+		}
+		function formatResult(value) 
+		{
+			const roundedValue = Math.ceil(value);
+			if (roundedValue > 100) return '-';
+			if (roundedValue < 40) return 40;
+			return roundedValue;
+		}
+	</script>
+</body>
+</html>
