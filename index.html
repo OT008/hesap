@@ -70,8 +70,8 @@
 				let CC = formatResult((50 - (x * 40 / 100)) * 100 / 60);
 				let CD = formatResult((40 - (x * 40 / 100)) * 100 / 60);
 
-				if (BC === 40) { CC = '-'; CD = '-'; }
-				else if (CC === 40) { CD = '-'; }
+				if (BC === 35) { CC = '-'; CD = '-'; }
+				else if (CC === 35) { CD = '-'; }
 
                 
 				document.getElementById('result').innerHTML = 
@@ -93,7 +93,7 @@
 		{
 			const roundedValue = Math.ceil(value);
 			if (roundedValue > 100) return '-';
-			if (roundedValue < 40) return 40;
+			if (roundedValue < 35) return 35;
 			return roundedValue;
 		}
 	</script>
