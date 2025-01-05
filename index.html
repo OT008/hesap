@@ -48,8 +48,8 @@
 </head>
 <body>
 	<h2>Not Hesaplama Aracı</h2>
-	<h5>AA (4) için ort<=82, AB (3.5) için ort<=74, BB (3) için ort<=65</h5>
-	<h5>BC (2.5) için ort<=58, CC (2) için ort<=50, CD (1.5) için ort<=40</h5>
+	<h5>AA (4) için ort<=82, BA (3.5) için ort<=74, BB (3) için ort<=65</h5>
+	<h5>CB (2.5) için ort<=58, CC (2) için ort<=50, DC (1.5) için ort<=40</h5>
 	<label for="inputNumber">Vize notunuzu girin (0-100 arası):</label>
 	<input type="number" id="inputNumber" step="any" min="0" max="100">
 	<button onclick="calculate()">Hesapla</button>
@@ -64,24 +64,24 @@
 			if (!isNaN(x) && x >= 0 && x <= 100) 
 			{
 				let AA = formatResult((82 - (x * 40 / 100)) * 100 / 60);
-				let AB = formatResult((74 - (x * 40 / 100)) * 100 / 60);
+				let BA = formatResult((74 - (x * 40 / 100)) * 100 / 60);
 				let BB = formatResult((65 - (x * 40 / 100)) * 100 / 60);
-				let BC = formatResult((58 - (x * 40 / 100)) * 100 / 60);
+				let CB = formatResult((58 - (x * 40 / 100)) * 100 / 60);
 				let CC = formatResult((50 - (x * 40 / 100)) * 100 / 60);
-				let CD = formatResult((40 - (x * 40 / 100)) * 100 / 60);
+				let DC = formatResult((40 - (x * 40 / 100)) * 100 / 60);
 
-				if (BC === 35) { CC = '-'; CD = '-'; }
-				else if (CC === 35) { CD = '-'; }
+				if (CB === 35) { CC = '-'; DC = '-'; }
+				else if (CC === 35) { DC = '-'; }
 
                 
 				document.getElementById('result').innerHTML = 
 				`
 					<p>AA (4) için: ${AA}</p>
-					<p>AB (3.5) için: ${AB}</p>
+					<p>AB (3.5) için: ${BA}</p>
 					<p>BB (3) için: ${BB}</p>
-					<p>BC (2.5) için: ${BC}</p>
+					<p>BC (2.5) için: ${CB}</p>
 					<p>CC (2) için: ${CC}</p>
-					<p class="red-text">CD (1.5) için: ${CD}</p>
+					<p class="red-text">CD (1.5) için: ${DC}</p>
 				`;
 			} 
 			else 
