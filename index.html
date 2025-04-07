@@ -1,101 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Not Hesaplama Aracı</title>
-	<style>
-		body 
-		{
-			font-family: Arial, sans-serif;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			height: 100vh;
-			margin: 0;
-			text-align: center;
-		}
-		input, button 
-		{
-			padding: 10px;
-			margin: 5px;
-			font-size: 16px;
-		}
-		.red-text 
-		{
-			color: red;	
-		}
-		h5 
-		{
-			font-weight: normal; /* Yazıyı normal yap */
-			margin: 2px 0; /* Aradaki boşluğu azalt */
-			padding: 0;
-		}
-		h2 
-		{
-			margin-bottom: 10px; /* "Not Hesaplama Aracı" başlığı ile diğer metin arasındaki mesafeyi azalt */
-		}
-		#result 
-		{
-			margin-top: 50px; /* Sonuçlar başlığını daha alt kısıma yerleştir */
-		}
-		h3 
-		{
-			margin-top: 20px; /* Sonuçlar başlığını biraz daha aşağıya kaydır */
-		}
-    	</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Not Hesaplama Aracı</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    h5 {
+      font-weight: normal;
+      margin: 2px 0;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+      width: calc(100% - 20px);
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .red-text {
+      color: red;
+      font-weight: bold;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+
+    h3 {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-	<h2>Not Hesaplama Aracı</h2>
-	<h5>AA (4) için ort<=82, BA (3.5) için ort<=74, BB (3) için ort<=65</h5>
-	<h5>CB (2.5) için ort<=58, CC (2) için ort<=50, DC (1.5) için ort<=40</h5>
-	<label for="inputNumber">Vize notunuzu girin (0-100 arası):</label>
-	<input type="number" id="inputNumber" step="any" min="0" max="100">
-	<button onclick="calculate()">Hesapla</button>
-	<h3>Sonuçlar:</h3>
+  <div class="container">
+    <h2>Not Hesaplama Aracı</h2>
+    <h5>AA (4) için ort<=82, BA (3.5) için ort<=74, BB (3) için ort<=65</h5>
+    <h5>CB (2.5) için ort<=58, CC (2) için ort<=50, DC (1.5) için ort<=40</h5>
     
-	<div id="result"></div>
+    <label for="inputNumber">Vize notunuzu girin (0-100 arası):</label>
+    <input type="number" id="inputNumber" step="any" min="0" max="100">
+    <button onclick="calculate()">Hesapla</button>
+    
+    <h3>Sonuçlar:</h3>
+    <div id="result"></div>
+  </div>
 
-	<script>
-		function calculate()
-		{
-			const x = parseFloat(document.getElementById('inputNumber').value);
-			if (!isNaN(x) && x >= 0 && x <= 100) 
-			{
-				let AA = formatResult((82 - (x * 40 / 100)) * 100 / 60);
-				let BA = formatResult((74 - (x * 40 / 100)) * 100 / 60);
-				let BB = formatResult((65 - (x * 40 / 100)) * 100 / 60);
-				let CB = formatResult((58 - (x * 40 / 100)) * 100 / 60);
-				let CC = formatResult((50 - (x * 40 / 100)) * 100 / 60);
-				let DC = formatResult((40 - (x * 40 / 100)) * 100 / 60);
+  <script>
+    function calculate() {
+      const x = parseFloat(document.getElementById('inputNumber').value);
+      if (!isNaN(x) && x >= 0 && x <= 100) {
+        let AA = formatResult((82 - (x * 40 / 100)) * 100 / 60);
+        let BA = formatResult((74 - (x * 40 / 100)) * 100 / 60);
+        let BB = formatResult((65 - (x * 40 / 100)) * 100 / 60);
+        let CB = formatResult((58 - (x * 40 / 100)) * 100 / 60);
+        let CC = formatResult((50 - (x * 40 / 100)) * 100 / 60);
+        let DC = formatResult((40 - (x * 40 / 100)) * 100 / 60);
 
-				if (CB === 35) { CC = '-'; DC = '-'; }
-				else if (CC === 35) { DC = '-'; }
+        if (CB === 35) { CC = '-'; DC = '-'; }
+        else if (CC === 35) { DC = '-'; }
 
-                
-				document.getElementById('result').innerHTML = 
-				`
-					<p>AA (4) için: ${AA}</p>
-					<p>BA (3.5) için: ${BA}</p>
-					<p>BB (3) için: ${BB}</p>
-					<p>CB (2.5) için: ${CB}</p>
-					<p>CC (2) için: ${CC}</p>
-					<p class="red-text">DC (1.5) için: ${DC}</p>
-				`;
-			} 
-			else 
-			{
-				document.getElementById('result').textContent = 'Geçersiz giriş, lütfen 0 ile 100 arasında bir değer girin.';
-			}
-		}
-		function formatResult(value) 
-		{
-			const roundedValue = Math.ceil(value);
-			if (roundedValue > 100) return '-';
-			if (roundedValue < 35) return 35;
-			return roundedValue;
-		}
-	</script>
+        document.getElementById('result').innerHTML = `
+          <p>AA (4) için: ${AA}</p>
+          <p>BA (3.5) için: ${BA}</p>
+          <p>BB (3) için: ${BB}</p>
+          <p>CB (2.5) için: ${CB}</p>
+          <p>CC (2) için: ${CC}</p>
+          <p class="red-text">DC (1.5) için: ${DC}</p>
+        `;
+      } else {
+        document.getElementById('result').textContent = 'Geçersiz giriş, lütfen 0 ile 100 arasında bir değer girin.';
+      }
+    }
+
+    function formatResult(value) {
+      const roundedValue = Math.ceil(value);
+      if (roundedValue > 100) return '-';
+      if (roundedValue < 35) return 35;
+      return roundedValue;
+    }
+  </script>
 </body>
 </html>
