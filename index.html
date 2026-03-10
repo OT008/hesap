@@ -207,8 +207,7 @@
 </head>
 <body>
   <main class="container">
-    <h1>Not Hesaplama</h1>
-    <p class="intro">Vize notunu girerek hedef harf notları icin finalden alman gereken en düşük notu görebilirsin.</p>
+    <h1>Not Hesaplama Aracı</h1>
 
     <section class="rules">
       <div class="rule"><strong>AA / 4.0</strong><span>Ortalama ≤ 82</span></div>
@@ -219,13 +218,12 @@
       <div class="rule" style="color: red;"><strong>DC / 1.5</strong><span>Ortalama ≤ 40</span></div>
     </section>
 
-    <label for="inputNumber">Vize notu</label>
+    <label for="inputNumber">Vize notun</label>
     <div class="input-row">
       <input type="number" id="inputNumber" step="any" min="0" max="100" placeholder="Örnek: 67">
       <button id="calculateButton" type="button">Hesapla</button>
     </div>
 
-    <p class="helper">Hesaplama 40% vize ve 60% final ağırlığına göre yapılır.</p>
     <div id="result" class="empty">Sonuçları görmek icin vize notunu gir.</div>
   </main>
 
