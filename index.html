@@ -218,7 +218,7 @@
       <div class="rule"><strong>DC / 1.5</strong><span>Ortalama ≤ 40</span></div>
     </section>
 
-    <label for="inputNumber">Vize notun</label>
+    <label for="inputNumber">Vize notu</label>
     <div class="input-row">
       <input type="number" id="inputNumber" step="any" min="0" max="100" placeholder="Örnek: 67">
       <button id="calculateButton" type="button">Hesapla</button>
@@ -274,7 +274,7 @@
       const midterm = parseFloat(input.value);
 
       if (Number.isNaN(midterm) || midterm < 0 || midterm > 100) {
-        showError("Geçersiz giriş. Lütfen 0 ile 100 arasında bir vize notu gir.");
+        showError("Lütfen 0 ile 100 arasında bir vize notu gir.");
         return;
       }
 
@@ -304,4 +304,5 @@
   </script>
 </body>
 </html>
+
 
