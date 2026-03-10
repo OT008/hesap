@@ -1,122 +1,308 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Not Hesaplama Aracı</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Not Hesaplama Araci</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+    :root {
+      --bg: #f4f4f2;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --danger: red;
+      --danger-soft: #fef2f2;
+      --accent-soft: #eff6ff;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
     }
 
-    .container {
-      text-align: center;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 500px;
-    }
-
-    h2 {
-      margin-bottom: 10px;
-    }
-
-    h5 {
-      font-weight: normal;
-      margin: 2px 0;
-    }
-
-    input, button {
-      padding: 10px;
-      margin: 5px;
-      font-size: 16px;
-      width: calc(100% - 20px);
+    * {
       box-sizing: border-box;
     }
 
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: min(640px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .intro {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .rules {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .rule {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fafafa;
+    }
+
+    .rule strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .rule span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
     button {
-      background-color: #007bff;
-      color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font: inherit;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background: var(--accent-dark);
     }
 
-    .red-text {
-      color: red;
-      font-weight: bold;
+    .helper {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
     }
 
-    #result {
-      margin-top: 20px;
+    .results {
+      display: grid;
+      gap: 10px;
     }
 
-    h3 {
-      margin-top: 20px;
+    .result-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .result-card strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .result-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .score {
+      min-width: 64px;
+      padding: 8px 10px;
+      text-align: center;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .score-danger {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .empty,
+    .error {
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+
+    .empty {
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      background: #fafafa;
+    }
+
+    .error {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 20px;
+      }
+
+      .rules {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .input-row {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Not Hesaplama Aracı</h2>
-    <h5>AA (4) için ort<=82, BA (3.5) için ort<=74</h5>
-    <h5>BB (3) için ort<=65, CB (2.5) için ort<=58</h5>
-    <h5>CC (2) için ort<=50, DC (1.5) için ort<=40</h5>
-    
-    <label for="inputNumber">Vize notunuzu girin (0-100 arası):</label>
-    <input type="number" id="inputNumber" step="any" min="0" max="100">
-    <button onclick="calculate()">Hesapla</button>
-    
-    <h3>Sonuçlar:</h3>
-    <div id="result"></div>
-  </div>
+  <main class="container">
+    <h1>Not Hesaplama</h1>
+    <p class="intro">Vize notunu girerek hedef harf notları icin finalden alman gereken en düşük notu görebilirsin.</p>
+
+    <section class="rules">
+      <div class="rule"><strong>AA / 4.0</strong><span>Ortalama ≤ 82</span></div>
+      <div class="rule"><strong>BA / 3.5</strong><span>Ortalama ≤ 74</span></div>
+      <div class="rule"><strong>BB / 3.0</strong><span>Ortalama ≤ 65</span></div>
+      <div class="rule"><strong>CB / 2.5</strong><span>Ortalama ≤ 58</span></div>
+      <div class="rule"><strong>CC / 2.0</strong><span>Ortalama ≤ 50</span></div>
+      <div class="rule" style="color: red;"><strong>DC / 1.5</strong><span>Ortalama ≤ 40</span></div>
+    </section>
+
+    <label for="inputNumber">Vize notu</label>
+    <div class="input-row">
+      <input type="number" id="inputNumber" step="any" min="0" max="100" placeholder="Örnek: 67">
+      <button id="calculateButton" type="button">Hesapla</button>
+    </div>
+
+    <p class="helper">Hesaplama 40% vize ve 60% final ağırlığına göre yapılır.</p>
+    <div id="result" class="empty">Sonuçları görmek icin vize notunu gir.</div>
+  </main>
 
   <script>
-    function calculate() {
-      const x = parseFloat(document.getElementById('inputNumber').value);
-      if (!isNaN(x) && x >= 0 && x <= 100) {
-        let AA = formatResult((82 - (x * 40 / 100)) * 100 / 60);
-        let BA = formatResult((74 - (x * 40 / 100)) * 100 / 60);
-        let BB = formatResult((65 - (x * 40 / 100)) * 100 / 60);
-        let CB = formatResult((58 - (x * 40 / 100)) * 100 / 60);
-        let CC = formatResult((50 - (x * 40 / 100)) * 100 / 60);
-        let DC = formatResult((40 - (x * 40 / 100)) * 100 / 60);
+    const thresholds = [
+      { label: "AA", point: "4.0", target: 82, danger: false },
+      { label: "BA", point: "3.5", target: 74, danger: false },
+      { label: "BB", point: "3.0", target: 65, danger: false },
+      { label: "CB", point: "2.5", target: 58, danger: false },
+      { label: "CC", point: "2.0", target: 50, danger: false },
+      { label: "DC", point: "1.5", target: 40, danger: true }
+    ];
 
-        if (CB === 35) { CC = '-'; DC = '-'; }
-        else if (CC === 35) { DC = '-'; }
-
-        document.getElementById('result').innerHTML = `
-          <p>AA (4) için: ${AA}</p>
-          <p>BA (3.5) için: ${BA}</p>
-          <p>BB (3) için: ${BB}</p>
-          <p>CB (2.5) için: ${CB}</p>
-          <p>CC (2) için: ${CC}</p>
-          <p class="red-text">DC (1.5) için: ${DC}</p>
-        `;
-      } else {
-        document.getElementById('result').textContent = 'Geçersiz giriş, lütfen 0 ile 100 arasında bir değer girin.';
-      }
-    }
+    const input = document.getElementById("inputNumber");
+    const result = document.getElementById("result");
+    const button = document.getElementById("calculateButton");
 
     function formatResult(value) {
       const roundedValue = Math.ceil(value);
-      if (roundedValue > 100) return '-';
+      if (roundedValue > 100) return "-";
       if (roundedValue < 35) return 35;
       return roundedValue;
     }
+
+    function renderResults(items) {
+      result.className = "results";
+      result.innerHTML = items.map((item) => {
+        const scoreClass = item.danger ? "score score-danger" : "score";
+		const titleStyle = item.danger ? 'style="color: var(--danger);"' : '';
+        return `
+          <article class="result-card">
+            <div>
+              <strong ${titleStyle}>${item.label} (${item.point})</strong>
+              <span>Gerekli final notu</span>
+            </div>
+            <div class="${scoreClass}">${item.required}</div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function showError(message) {
+      result.className = "error";
+      result.textContent = message;
+    }
+
+    function calculate() {
+      const midterm = parseFloat(input.value);
+
+      if (Number.isNaN(midterm) || midterm < 0 || midterm > 100) {
+        showError("Geçersiz giriş. Lütfen 0 ile 100 arasında bir vize notu gir.");
+        return;
+      }
+
+      const items = thresholds.map((item) => ({
+        ...item,
+        required: formatResult((item.target - (midterm * 40 / 100)) * 100 / 60)
+      }));
+
+      const cbItem = items.find((item) => item.label === "CB");
+      const ccItem = items.find((item) => item.label === "CC");
+      const dcItem = items.find((item) => item.label === "DC");
+
+      if (cbItem && cbItem.required === 35) {
+        if (ccItem) ccItem.required = "-";
+        if (dcItem) dcItem.required = "-";
+      } else if (ccItem && ccItem.required === 35 && dcItem) {
+        dcItem.required = "-";
+      }
+
+      renderResults(items);
+    }
+
+    button.addEventListener("click", calculate);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") calculate();
+    });
   </script>
 </body>
 </html>
